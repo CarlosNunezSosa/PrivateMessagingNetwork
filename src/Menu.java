@@ -5,7 +5,9 @@ import java.awt.*;
 
 public class Menu extends JFrame{
         Menu(){
+            ImageIcon imageIcon = new ImageIcon("C:\\Users\\charl\\git\\PrivateMessagingNetwork\\src\\Images/server.png");
             this.setTitle("Private Home Network");  // Sets title for window.
+            this.setIconImage(imageIcon.getImage());
             this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);  // Makes the frame close on command.
             this.setResizable(false);  // Makes the frame non resizable.
             this.add(title_of_program());
@@ -49,10 +51,15 @@ public class Menu extends JFrame{
             connectButton.setFont(new Font("Daytona", Font.BOLD, 10));
             connectButton.setFocusable(false);
             connectButton.setBounds(65,25,125,50);
-            connectButton.addActionListener(e -> System.out.println("Attempting to Connect"));
+            connectButton.addActionListener(e -> action());
 
             panel.add(connectButton);
             return panel;
+        }
+
+        public void action(){
+            MessagingWindow myMessageSystem = new MessagingWindow();
+            this.dispose();
         }
 
 
