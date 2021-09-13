@@ -13,8 +13,10 @@ public class MessagingWindow extends JFrame {
         this.setLayout(null);
         this.add(serverConnection());
         this.add(returnButton());
-        this.add(makeJPanel(800,800,75,50,Color.ORANGE));
+        this.add(sendMessageButton());
+        this.add(makeJPanel(800,800,75,50,Color.GRAY));
         this.add(makeJPanel(75,640,0,50,Color.RED));
+
         this.setVisible(true);  // Makes frame appear on screen.
         this.setSize(500,640); // Sets the shape of frame.
     }
@@ -36,6 +38,7 @@ public class MessagingWindow extends JFrame {
         returnButton.setFocusable(false);
         returnButton.setBounds(0,0,75,50);
         returnButton.addActionListener(e->returnHome());
+
         JPanel returnJPanel = makeJPanel(75,50,0,0,Color.magenta);
         returnJPanel.add(returnButton);
         return returnJPanel;
@@ -44,8 +47,8 @@ public class MessagingWindow extends JFrame {
     public JPanel serverConnection(){
         JLabel messagingTitle = new JLabel();
         messagingTitle.setLayout(null);
-        messagingTitle.setBounds(100,0,500,50);
-        messagingTitle.setText("Connection ::: Server");
+        messagingTitle.setBounds(60,0,500,50);
+        messagingTitle.setText("Connection ::: ServerToConnect");
         messagingTitle.setFont(new Font("Daytona", Font.BOLD, 20));
 
         messagingTitle.setBackground(Color.gray);
@@ -59,6 +62,27 @@ public class MessagingWindow extends JFrame {
         this.dispose();
         new Menu();
     }
+
+    public JPanel sendMessageButton(){
+
+        JButton messageButton = new JButton();
+
+        messageButton.setText("Send");
+        messageButton.setFocusable(false);
+        messageButton.setBounds(0,0,75,90);
+        messageButton.addActionListener(e->sendMessage());
+
+        JPanel messagePanel = makeJPanel(420,100,75,520,Color.BLACK);
+        messagePanel.setLayout(null);
+        messagePanel.add(messageButton);
+        return messagePanel;
+    }
+
+    public void sendMessage(){
+        System.out.println("Sending Message Now");
+    }
+
+
 
 
 }
