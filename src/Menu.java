@@ -20,7 +20,7 @@ public class Menu extends JFrame{
 
         public JLabel title_of_program(){
 
-            ImageIcon imageIcon = new ImageIcon("C:\\Users\\charl\\git\\GUI\\src\\Images/server.png");
+            ImageIcon imageIcon = new ImageIcon("C:\\Users\\charl\\git\\PrivateMessagingNetwork\\src\\Images/server.png");
             Image image = imageIcon.getImage();
             Image icon = image.getScaledInstance(120,120, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(icon);
