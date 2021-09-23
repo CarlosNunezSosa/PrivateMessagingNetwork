@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MessagingWindow extends JFrame {
 
-   // Global Fields to be accessed by multiple methods
-   public JTextArea messageField = new JTextArea(); // Message Area where text will be written.
-   public JPanel messagesWindow = makeJPanel(420,500,75,50,Color.darkGray); // Message window where messages the last 4 messages sent are shown
+    // Global Fields to be accessed by multiple methods
+    public JTextArea messageField = new JTextArea(); // Message Area where text will be written.
+    public JPanel messagesWindow = makeJPanel(420,500,75,50,Color.darkGray); // Message window where messages the last 4 messages sent are shown.
+    public ArrayList<JLabel> messagesThatHaveBeenSent = new ArrayList<>();
+
 
     // Messaging Window Constructor
     MessagingWindow(){
@@ -20,7 +23,6 @@ public class MessagingWindow extends JFrame {
         this.add(sendMessageButton()); // Adds SEND button.
         this.add(messageHistory()); // Adds the message History Panel.
         this.add(windowForMessages()); // Adds the Panel for previous sent messages.
-        this.add(makeJPanel(800,800,75,50,Color.white)); // Sets teh color background for the main window.
         this.pack(); // Organizes everything neatly.
         this.setVisible(true);  // Makes frame appear on screen.
         this.setSize(500,640); // Sets the shape of frame.
@@ -62,7 +64,6 @@ public class MessagingWindow extends JFrame {
         //JPanel for the Label to be added to.
         JPanel serverConnectionLabel = makeJPanel(500,50,75,0,null); // Creates the JPanel.
         serverConnectionLabel.add(messagingTitle); // Adds teh JLabel to the JPanel
-
         return serverConnectionLabel; // Returns the JPanel with the JLabel included.
     }
 
@@ -91,17 +92,47 @@ public class MessagingWindow extends JFrame {
         JPanel messagePanel = makeJPanel(420,100,75,520,null); // Creates the JPanel.
         messagePanel.add(messageField); // Adds the message field to the panel.
         messagePanel.add(messageButton); // Adds the message button to the panel.
+
         return messagePanel; // Return the Panel with the message field and send button added.
     }
 
     // Sends the Message once the button is pressed.
     public void sendMessage(){
-        System.out.println(messageField.getText()); // Place holding code.
+        if(messagesThatHaveBeenSent.isEmpty()) {
+            JLabel newMessage = new JLabel();
+            newMessage.setFont(new Font("Daytona", Font.BOLD, 10));
+            newMessage.setBounds(350, 400, 200, 40);
+            newMessage.setBackground(Color.orange);
+            newMessage.setForeground(Color.GREEN);
+            newMessage.setText("<--"+messageField.getText());
+            messagesThatHaveBeenSent.add(newMessage); // Adds the new message to the message Array.
+            messagesWindow.add(newMessage);
+            this.repaint();
+
+        }
+        else {
+            for (int i=0; i<messagesThatHaveBeenSent.size();i++) {
+                JLabel message = messagesThatHaveBeenSent.get(i);
+                message.setBounds(350,400-(60*(i+1)), 200, 40);
+                this.repaint();
+            }
+
+            JLabel newMessage = new JLabel();
+            newMessage.setFont(new Font("Daytona", Font.BOLD, 10));
+            newMessage.setBounds(350, 400, 200, 40);
+            newMessage.setBackground(Color.orange);
+            newMessage.setForeground(Color.GREEN);
+            newMessage.setText("<--"+messageField.getText());
+            messagesThatHaveBeenSent.add(0,newMessage); // Adds the new message to the message Array.
+            messagesWindow.add(newMessage);
+            this.repaint();
+        }
         messageField.setText(""); // Sets the field text back to blank.
     }
 
     // Window where sent messages are shown
     public JPanel windowForMessages(){
+        messagesWindow.setLayout(null);
         return messagesWindow; // returns the already made Window.
     }
 
