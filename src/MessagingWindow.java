@@ -98,41 +98,42 @@ public class MessagingWindow extends JFrame {
 
     // Sends the Message once the button is pressed.
     public void sendMessage(){
-        if(messagesThatHaveBeenSent.isEmpty()) {
-            JLabel newMessage = new JLabel();
-            newMessage.setFont(new Font("Daytona", Font.BOLD, 10));
-            newMessage.setBounds(350, 400, 200, 40);
-            newMessage.setBackground(Color.orange);
-            newMessage.setForeground(Color.GREEN);
-            newMessage.setText("<--"+messageField.getText());
-            messagesThatHaveBeenSent.add(newMessage); // Adds the new message to the message Array.
-            messagesWindow.add(newMessage);
-            this.repaint();
+        // Action to Show Message on Screen.
+        if(messagesThatHaveBeenSent.isEmpty()) { // Verifies if messagesThatHveBeenSent is Empty.
+            // Message Label.
+            JLabel newMessage = new JLabel(); // Creates new Label called newMessage.
+            newMessage.setFont(new Font("Daytona", Font.BOLD, 10)); // Sets Font for the Label.
+            newMessage.setBounds(350, 400, 200, 40); // Sets the Bounds for the Label.
+            newMessage.setForeground(Color.GREEN); // Sets the color for the Text.
+            newMessage.setText("<--"+messageField.getText()); // Sets the Text for the Label.
+            messagesThatHaveBeenSent.add(newMessage); // Adds the newMessage Label to the message Array.
+            messagesWindow.add(newMessage);// Adds the newMessage Label to the window.
 
         }
         else {
-            for (int i=0; i<messagesThatHaveBeenSent.size();i++) {
-                JLabel message = messagesThatHaveBeenSent.get(i);
-                message.setBounds(350,400-(60*(i+1)), 200, 40);
-                this.repaint();
+            for (int i=0; i<messagesThatHaveBeenSent.size();i++) { // For loop that goes through the messagesThatHaveBeenSent array to show all the past messages before adding the new one.
+                JLabel message = messagesThatHaveBeenSent.get(i); // Saves the messagesThatHaveBeenSent[i] into a temp. variable called message.
+                message.setBounds(350,400-(60*(i+1)), 200, 40); // Updates the bounds for the message.
+                this.repaint(); // Repaints the window to update the boundary change.
             }
 
-            JLabel newMessage = new JLabel();
-            newMessage.setFont(new Font("Daytona", Font.BOLD, 10));
-            newMessage.setBounds(350, 400, 200, 40);
-            newMessage.setBackground(Color.orange);
-            newMessage.setForeground(Color.GREEN);
-            newMessage.setText("<--"+messageField.getText());
-            messagesThatHaveBeenSent.add(0,newMessage); // Adds the new message to the message Array.
-            messagesWindow.add(newMessage);
-            this.repaint();
+            // Message Label.
+            JLabel newMessage = new JLabel(); // Creates new Label called newMessage.
+            newMessage.setFont(new Font("Daytona", Font.BOLD, 10)); // Sets Font for the Label.
+            newMessage.setBounds(350, 400, 200, 40); // Sets the Bounds for the Label.
+            newMessage.setForeground(Color.GREEN); // Sets the color for the Text.
+            newMessage.setText("<--"+messageField.getText()); // Sets the Text for the Label.
+            messagesThatHaveBeenSent.add(newMessage); // Adds the newMessage Label to the message Array.
+            messagesWindow.add(newMessage);// Adds the newMessage Label to the window.
         }
+
+        this.repaint(); // Repaints so that the latest message appears.
         messageField.setText(""); // Sets the field text back to blank.
     }
 
     // Window where sent messages are shown
     public JPanel windowForMessages(){
-        messagesWindow.setLayout(null);
+        messagesWindow.setLayout(null); // Sets the Layout for the Window to null.
         return messagesWindow; // returns the already made Window.
     }
 
