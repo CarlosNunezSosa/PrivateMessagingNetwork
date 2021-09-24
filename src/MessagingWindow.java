@@ -123,7 +123,7 @@ public class MessagingWindow extends JFrame {
             newMessage.setBounds(350, 400, 200, 40); // Sets the Bounds for the Label.
             newMessage.setForeground(Color.GREEN); // Sets the color for the Text.
             newMessage.setText("<--"+messageField.getText()); // Sets the Text for the Label.
-            messagesThatHaveBeenSent.add(newMessage); // Adds the newMessage Label to the message Array.
+            messagesThatHaveBeenSent.add(0, newMessage); // Adds the newMessage Label to the message Array.
             messagesWindow.add(newMessage);// Adds the newMessage Label to the window.
         }
 
